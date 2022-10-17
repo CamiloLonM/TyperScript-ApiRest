@@ -6,12 +6,13 @@ import {
   postItem,
   updateItem,
 } from "../controllers/items";
+import { logginMiddleware } from "../middleware/connectionAddress";
 
 const router = Router();
 
 router.get("/", getItems);
 
-router.get("/:id", getItem);
+router.get("/:id", logginMiddleware, getItem);
 
 router.post("/", postItem);
 

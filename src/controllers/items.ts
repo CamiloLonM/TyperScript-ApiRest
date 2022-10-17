@@ -12,7 +12,8 @@ const getItem = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const response = await getCar(id);
-    res.send(response);
+    const data = response ? response : "NOT_FOUND";
+    res.send(data);
   } catch (error) {
     handleHttp(res, "ERROR_Get_Item");
   }
@@ -31,7 +32,8 @@ const updateItem = async ({ params, body }: Request, res: Response) => {
   try {
     const { id } = params;
     const response = await updateCar(id, body);
-    res.send(response);
+    const data = response ? response : "NOT_FOUND";
+    res.send(data);
   } catch (error) {
     handleHttp(res, "ERROR_Update_Item");
   }
