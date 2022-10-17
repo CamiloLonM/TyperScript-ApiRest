@@ -1,10 +1,11 @@
 // Una interface es una declaracion de una propiedad y tipo de dato
 export interface Car {
-  type: "Automobiles" | "Trucks" | "Pick-up";
+  type: "Automobiles" | "Trucks" | "Pick-up" | "Wagon";
   model: string;
+  year: number;
   color: string;
-  cylinder: string;
-  gas: "Gasoline" | "Electric" | "Diesel";
+  cylinder: number;
+  gas: "Gasoline" | "Electric" | "Diesel" | "Hybrid";
   descripcion: string;
   price: number;
 }
