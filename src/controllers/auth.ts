@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
+import { registerUser, logginUser } from "../services/auth";
 
-const userRegister = async (req: Request, res: Response) => {};
+const registerCtrl = async ({ body }: Request, res: Response) => {
+  const responseUser = await registerUser(body);
+  res.send(responseUser);
+};
 
-const logginUser = async (req: Request, res: Response) => {};
+const logginCtrl = async (req: Request, res: Response) => {};
 
-export { userRegister, logginUser };
+export { registerCtrl, logginCtrl };
