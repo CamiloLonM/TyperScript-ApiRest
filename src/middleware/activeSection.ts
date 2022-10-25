@@ -15,7 +15,7 @@ const checkSection = (req: RequestExt, res: Response, next: NextFunction) => {
     if (!isUser) {
       res.status(401), res.send("YOU DON'T HAVE A VALID JWT");
     } else {
-      (req.user = isUser), // 2 ---
+      (req.user = isUser), // 1  la llamo aca ----
         next();
     }
   } catch (error) {
