@@ -1,17 +1,14 @@
-import { NextFunction, Request, Response } from "express";
-import { JwtPayload } from "jsonwebtoken";
+import { NextFunction, Response } from "express";
 import { verifyToken } from "../utils/jwt.handle";
 
 // 1 ---Saber quien esta consumiendo la data
-interface RequestExt extends Request {
-  user?: string | JwtPayload;
-}
+import { RequestExt } from "../interfaces/req-ext";
 
 const checkSection = (req: RequestExt, res: Response, next: NextFunction) => {
   try {
     const jwtByUser = req.headers.authorization || "";
     const jwt = jwtByUser.split(" ").pop();
-    const isUser = verifyToken(`${jwt}`); // pasa a ser un string
+    const isUser = verifyToken(`${jwt}`) as { id: string }; // pasa a ser un string el as por problema de tipado
     if (!isUser) {
       res.status(401), res.send("YOU DON'T HAVE A VALID JWT");
     } else {
