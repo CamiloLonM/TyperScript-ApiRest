@@ -15,8 +15,7 @@ const getOrder = (req: Request, res: Response) => {
 
 const getOrders = (req: RequestExt, res: Response) => {
   try {
-    res.send({ data: "esto lo ven los registrados" });
-    user: req.user;
+    res.send({ data: "esto lo ven los registrados", user: req.user }); // trazabilidad -- El user que hace la petición
   } catch (error) {
     handleHttp(res, "ERROR_Update_Blog");
   }
