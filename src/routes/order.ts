@@ -15,6 +15,6 @@ router.get("/", checkSection, getOrders);
 router.get("/:numberOfOrder", checkSection, getOrder);
 router.post("/", checkSection, postOrder);
 router.put("/:numberOfOrder", checkSection, updateOrder);
-router.delete("/:numberOfOrder", deleteOrder);
+router.delete("/:numberOfOrder", checkSection, deleteOrder);
 
 export { router };
