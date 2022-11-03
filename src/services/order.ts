@@ -19,9 +19,20 @@ const insertOrder = async (
   return responseInsert;
 };
 
+const modifyOrder = async (data: Order, numberOfOrder: string) => {
+  const respondemodify = await OrderModel.findOneAndUpdate(
+    { numberOfOrder },
+    data,
+    {
+      new: true,
+    }
+  );
+  return respondemodify;
+};
+
 const removeOrder = async (numberOfOrder: string) => {
   const reponseRemove = await OrderModel.deleteOne({ numberOfOrder });
   return reponseRemove;
 };
 
-export { callOrder, insertOrder, callOrders, removeOrder };
+export { callOrder, insertOrder, callOrders, removeOrder, modifyOrder };

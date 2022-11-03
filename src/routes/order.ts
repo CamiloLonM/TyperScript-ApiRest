@@ -14,7 +14,7 @@ const router = Router();
 router.get("/", checkSection, getOrders);
 router.get("/:numberOfOrder", checkSection, getOrder);
 router.post("/", checkSection, postOrder);
-router.put("/", updateOrder);
-router.delete("/", deleteOrder);
+router.put("/:numberOfOrder", checkSection, updateOrder);
+router.delete("/:numberOfOrder", deleteOrder);
 
 export { router };

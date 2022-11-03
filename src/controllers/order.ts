@@ -5,6 +5,7 @@ import {
   callOrder,
   callOrders,
   insertOrder,
+  modifyOrder,
   removeOrder,
 } from "../services/order";
 
@@ -28,8 +29,12 @@ const getOrders = async (req: RequestExt, res: Response) => {
   }
 };
 
-const updateOrder = (req: Request, res: Response) => {
+const updateOrder = async ({ params, body }: Request, res: Response) => {
   try {
+    const { numberOfOrder } = params;
+    const responseOrder = await modifyOrder(body, numberOfOrder);
+    const data = responseOrder ? responseOrder : "NOT_FOUND";
+    res.send(data);
   } catch (error) {
     handleHttp(res, "ERROR_Update_Order");
   }
