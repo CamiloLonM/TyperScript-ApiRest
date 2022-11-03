@@ -4,3 +4,6 @@ storage/*
 !storage/.gitkeep
 dist/
 
+!storage/.gitkeep
+dist/
+
