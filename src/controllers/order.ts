@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { RequestExt } from "../interfaces/req-ext";
-import { callOrder, callOrders, insertOrder } from "../services/order";
+import {
+  callOrder,
+  callOrders,
+  insertOrder,
+  removeOrder,
+} from "../services/order";
 
 const getOrder = async (req: Request, res: Response) => {
   try {
@@ -39,8 +44,11 @@ const postOrder = async ({ body }: Request, res: Response) => {
   }
 };
 
-const deleteOrder = (req: Request, res: Response) => {
+const deleteOrder = async ({ params }: Request, res: Response) => {
   try {
+    const { numberOfOrder } = params;
+    const responseOrder = await removeOrder(numberOfOrder);
+    res.send(responseOrder);
   } catch (error) {
     handleHttp(res, "ERROR_Delete_Blog");
   }

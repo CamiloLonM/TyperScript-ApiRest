@@ -19,4 +19,9 @@ const insertOrder = async (
   return responseInsert;
 };
 
-export { callOrder, insertOrder, callOrders };
+const removeOrder = async (numberOfOrder: string) => {
+  const reponseRemove = await OrderModel.deleteOne({ numberOfOrder });
+  return reponseRemove;
+};
+
+export { callOrder, insertOrder, callOrders, removeOrder };
