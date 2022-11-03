@@ -9,7 +9,7 @@
     "strict": true,
     "skipLibCheck": true,
 
-    //Dirrectorio de salida para destribución de compilado
+    //Dirrectorio de salida para destribución (compilado)
     "outDir": "./dist"
   }
 }
