@@ -16,7 +16,7 @@ const insertCar = async (item: Car) => {
   return responseInsert;
 };
 
-const updateCar = async (id: String, data: Car) => {
+const updateCar = async (id: string, data: Car) => {
   const responseUpdate = await ItemModel.findByIdAndUpdate({ _id: id }, data, {
     new: true, // responde el objeto actualizado
   });

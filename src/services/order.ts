@@ -1,11 +1,38 @@
+import { Order } from "../interfaces/order.interface";
 import OrderModel from "../models/order";
+import { Document } from "mongoose";
 
-const getOrders = async () => {
+const callOrders = async (): Promise<Document<any, any, Order>[]> => {
   const responseItem = await OrderModel.find({});
   return responseItem;
 };
 
-const getOrder = async () => {};
+const callOrder = async (numberOfOrder: string) => {
+  const responseId = await OrderModel.findOne({ numberOfOrder });
+  return responseId;
+};
 
-const postOrder = async () => {};
-export { getOrders, postOrder, getOrder };
+const insertOrder = async (
+  order: Order
+): Promise<Document<any, any, Order>> => {
+  const responseInsert = await OrderModel.create(order);
+  return responseInsert;
+};
+
+const modifyOrder = async (data: Order, numberOfOrder: string) => {
+  const respondemodify = await OrderModel.findOneAndUpdate(
+    { numberOfOrder },
+    data,
+    {
+      new: true,
+    }
+  );
+  return respondemodify;
+};
+
+const removeOrder = async (numberOfOrder: string) => {
+  const reponseRemove = await OrderModel.deleteOne({ numberOfOrder });
+  return reponseRemove;
+};
+
+export { callOrder, insertOrder, callOrders, removeOrder, modifyOrder };

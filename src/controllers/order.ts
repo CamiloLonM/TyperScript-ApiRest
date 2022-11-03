@@ -1,42 +1,62 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
 import { RequestExt } from "../interfaces/req-ext";
+import {
+  callOrder,
+  callOrders,
+  insertOrder,
+  modifyOrder,
+  removeOrder,
+} from "../services/order";
 
-const getOrder = (req: Request, res: Response) => {
+const getOrder = async (req: Request, res: Response) => {
   try {
+    const { numberOfOrder } = req.params;
+    const response = await callOrder(numberOfOrder);
+    const data = response ? response : "NOT_FOUND";
+    res.send(data);
   } catch (error) {
-    handleHttp(res, "ERROR_Update_Blog");
+    handleHttp(res, "ERROR_Get_Order");
   }
 };
 
-const getOrders = (req: RequestExt, res: Response) => {
+const getOrders = async (req: RequestExt, res: Response) => {
   try {
-    res.send({ data: "esto lo ven los registrados", user: req.user }); // trazabilidad -- El user que hace la petición
+    const response = await callOrders();
+    res.send({ response, user: req.user }); // trazabilidad -- El user que hace la petición
   } catch (error) {
-    handleHttp(res, "ERROR_Update_Blog");
+    handleHttp(res, "ERROR_Get_Orders");
   }
 };
 
-const updateOrder = (req: Request, res: Response) => {
+const updateOrder = async ({ params, body }: Request, res: Response) => {
   try {
+    const { numberOfOrder } = params;
+    const responseOrder = await modifyOrder(body, numberOfOrder);
+    const data = responseOrder ? responseOrder : "NOT_FOUND";
+    res.send(data);
   } catch (error) {
-    handleHttp(res, "ERROR_Update_Blog");
+    handleHttp(res, "ERROR_Update_Order");
   }
 };
 
-const postOrder = ({ body }: Request, res: Response) => {
+const postOrder = async ({ body }: Request, res: Response) => {
   try {
-    res.send(body);
+    const responseOrder = await insertOrder(body);
+    res.send(responseOrder);
   } catch (error) {
     handleHttp(res, "ERROR_Post_Blog");
   }
 };
 
-const deleteBlog = (req: Request, res: Response) => {
+const deleteOrder = async ({ params }: Request, res: Response) => {
   try {
+    const { numberOfOrder } = params;
+    const responseOrder = await removeOrder(numberOfOrder);
+    res.send(responseOrder);
   } catch (error) {
     handleHttp(res, "ERROR_Delete_Blog");
   }
 };
 
-export { getOrder, getOrders, postOrder, deleteBlog, updateOrder };
+export { getOrder, getOrders, postOrder, deleteOrder, updateOrder };
