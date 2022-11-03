@@ -7,10 +7,6 @@ const OrderSchema = new Schema<Order>(
       type: String,
       required: true,
     },
-    creationDate: {
-      type: Date,
-      required: true,
-    },
     cityAndState: {
       type: String,
       required: true,
